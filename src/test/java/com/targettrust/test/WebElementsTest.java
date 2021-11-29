@@ -91,5 +91,33 @@ public class WebElementsTest {
 		
 		assertEquals("Item 7", selectSingle.getFirstSelectedOption().getText());
 	}
+	
+	@Test
+	public void testValidateDropDownMultiple() {
+		WebElement dropMulti = driver.findElement(By.name("multiselectdropdown"));
+		Select selectMulti = new Select(dropMulti);
+		
+		selectMulti.selectByIndex(4);
+		selectMulti.selectByIndex(7);
+		selectMulti.selectByVisibleText("Item 9");
+		
+		List<WebElement> allSelected = selectMulti.getAllSelectedOptions();
+		
+		assertEquals(3, allSelected.size());
+		
+		assertEquals("Item 5", allSelected.get(0).getText());
+		assertEquals("Item 8", allSelected.get(1).getText());
+		assertEquals("Item 9", allSelected.get(2).getText());
+		
+		selectMulti.deselectByVisibleText("Item 5");
+		
+		allSelected = selectMulti.getAllSelectedOptions();
+		
+		assertEquals(2, allSelected.size());
+			
+		assertEquals("Item 8", allSelected.get(0).getText());
+		assertEquals("Item 9", allSelected.get(1).getText());
+		
+	}
 
 }
