@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -140,6 +141,32 @@ public class WebElementsTest {
 		assertTrue(btnAlert.isDisplayed());
 	}
 	
+	@Test
+	public void testAlert() {
+		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		btnAlert.click();
+		
+		Alert alert = driver.switchTo().alert();
+		
+		assertEquals("Eu sou um alerta!", alert.getText());
+		
+		alert.accept();		
+	}
 	
+	@Test 
+	public void testConfirm() {
+		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
+		btnConfirm.click();
+		
+		Alert confirm = driver.switchTo().alert();
+		
+		assertEquals("Pressione um botão!", confirm.getText());
+		
+		confirm.dismiss();
+		
+		btnConfirm.click();
+		assertEquals("Pressione um botão!", confirm.getText());
+		confirm.accept();
+	}
 
 }
