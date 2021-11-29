@@ -12,6 +12,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 
 public class WebElementsTest {
 	
@@ -77,6 +78,18 @@ public class WebElementsTest {
 		assertTrue("Deveria estar selecionado na posição 3", radios.get(2).isSelected());		
 		assertFalse("Deveria estar selecionado na posição 4", radios.get(3).isSelected());
 		
+	}
+	
+	@Test
+	public void testValidateDropDownSingle() throws InterruptedException {
+		WebElement dropSingle = driver.findElement(By.name("dropdownlist"));
+		Select selectSingle = new Select(dropSingle);
+		
+		selectSingle.selectByVisibleText("Item 1");
+		selectSingle.selectByVisibleText("Item 9");
+		selectSingle.selectByVisibleText("Item 7");
+		
+		assertEquals("Item 7", selectSingle.getFirstSelectedOption().getText());
 	}
 
 }
