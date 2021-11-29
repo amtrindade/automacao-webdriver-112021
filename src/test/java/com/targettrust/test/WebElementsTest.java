@@ -119,5 +119,27 @@ public class WebElementsTest {
 		assertEquals("Item 9", allSelected.get(1).getText());
 		
 	}
+	
+	@Test
+	public void testIframe() {
+	
+		driver.switchTo().frame("iframe_d");
+		
+		WebElement menu = driver.findElement(By.xpath("//nav/button"));
+		menu.click();
+		
+		//TODO implementar espera
+		WebElement textFieldSearch = driver.findElement(By.cssSelector("span > input"));
+		textFieldSearch.sendKeys("Antônio");
+		
+		assertEquals("Antônio", textFieldSearch.getAttribute("value"));
+				
+		driver.switchTo().defaultContent();
+		
+		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		assertTrue(btnAlert.isDisplayed());
+	}
+	
+	
 
 }
