@@ -7,7 +7,10 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,6 +18,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WebElementsTest {
 	
 	public WebDriver driver;
@@ -34,12 +38,13 @@ public class WebElementsTest {
 	}
 
 	@Test
-	public void testValidateTitle() {
+	public void testA_ValidateTitle() {
 		assertEquals("Selenium WebDriver Test Page", driver.getTitle());
 	}
 	
+	@Ignore("Bug registrado no Jira cod-323")
 	@Test
-	public void testValidateName() {
+	public void test1_ValidateName() {
 		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
 		
 		textFieldName.sendKeys("Antônio");
@@ -49,7 +54,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
-	public void testShouldBeDisable() {
+	public void should1_BeDisable() {
 		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
 		
 		assertTrue("Deveria estar habilitado!", textFieldName.isEnabled());
@@ -142,7 +147,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
-	public void testAlert() {
+	public void testB_Alert() {
 		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
 		btnAlert.click();
 		

@@ -26,11 +26,13 @@ public class CalcTest {
 		driver = new ChromeDriver();
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);	
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/desafiosoma.html");
-
+		driver.get("http://antoniotrindade.com.br/treinoautomacao/desafiosoma.html");		
+	}
+	
+	private void mapeiaElementos() {
 		textNumber1 = driver.findElement(By.id("number1"));
 		textNumber2 = driver.findElement(By.id("number2"));
-		textTotal = driver.findElement(By.id("total"));	
+		textTotal = driver.findElement(By.id("total"));
 	}
 
 	@After
@@ -40,6 +42,7 @@ public class CalcTest {
 	
 	@Test
 	public void testSum() throws InterruptedException {
+		mapeiaElementos();
 		WebElement btnSum = driver.findElement(By.id("somar"));
 		
 		Float value1 = 5.45f;
@@ -60,6 +63,7 @@ public class CalcTest {
 	
 	@Test
 	public void testSubtract() {
+		mapeiaElementos();
 		WebElement btnSubtract = driver.findElement(By.id("subtrair"));
 		
 		Float value1 = 5.5f;
