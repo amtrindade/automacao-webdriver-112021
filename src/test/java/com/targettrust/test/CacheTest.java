@@ -7,10 +7,14 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.targettrust.inter.NegativeInterface;
+import com.targettrust.inter.PositiveInterface;
 
 public class CacheTest {
 
@@ -30,7 +34,9 @@ public class CacheTest {
 		driver.quit();
 	}
 
+	
 	@Test
+	@Category({PositiveInterface.class, NegativeInterface.class})
 	public void testNavigationWithCache() {
 		assertEquals("Treino Automação de Testes", driver.getTitle());
 		

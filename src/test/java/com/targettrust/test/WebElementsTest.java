@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -17,6 +18,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
+
+import com.targettrust.inter.NegativeInterface;
+import com.targettrust.inter.PositiveInterface;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class WebElementsTest {
@@ -37,13 +41,16 @@ public class WebElementsTest {
 		driver.quit();
 	}
 
+	
 	@Test
+	@Category(PositiveInterface.class)
 	public void testA_ValidateTitle() {
 		assertEquals("Selenium WebDriver Test Page", driver.getTitle());
 	}
 	
 	@Ignore("Bug registrado no Jira cod-323")
 	@Test
+	@Category(PositiveInterface.class)
 	public void test1_ValidateName() {
 		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
 		
@@ -54,6 +61,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
+	@Category(PositiveInterface.class)
 	public void should1_BeDisable() {
 		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
 		
@@ -66,6 +74,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
+	@Category(PositiveInterface.class)
 	public void testRadioGroup() throws InterruptedException {
 		List<WebElement> radios = driver.findElements(By.name("radioGroup1"));
 	
@@ -99,6 +108,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
+	@Category(NegativeInterface.class)
 	public void testValidateDropDownMultiple() {
 		WebElement dropMulti = driver.findElement(By.name("multiselectdropdown"));
 		Select selectMulti = new Select(dropMulti);
@@ -127,6 +137,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
+	@Category(NegativeInterface.class)
 	public void testIframe() {
 	
 		driver.switchTo().frame("iframe_d");
@@ -147,6 +158,7 @@ public class WebElementsTest {
 	}
 	
 	@Test
+	@Category(NegativeInterface.class)
 	public void testB_Alert() {
 		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
 		btnAlert.click();
@@ -159,6 +171,7 @@ public class WebElementsTest {
 	}
 	
 	@Test 
+	@Category(NegativeInterface.class)
 	public void testConfirm() {
 		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
 		btnConfirm.click();

@@ -7,10 +7,14 @@ import java.util.concurrent.TimeUnit;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+
+import com.targettrust.inter.NegativeInterface;
+import com.targettrust.inter.PositiveInterface;
 
 public class CalcTest {
 
@@ -41,6 +45,7 @@ public class CalcTest {
 	}
 	
 	@Test
+	@Category(NegativeInterface.class)
 	public void testSum() throws InterruptedException {
 		mapeiaElementos();
 		WebElement btnSum = driver.findElement(By.id("somar"));
@@ -62,6 +67,7 @@ public class CalcTest {
 	}
 	
 	@Test
+	@Category(PositiveInterface.class)
 	public void testSubtract() {
 		mapeiaElementos();
 		WebElement btnSubtract = driver.findElement(By.id("subtrair"));
