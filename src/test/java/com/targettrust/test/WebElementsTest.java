@@ -17,7 +17,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.targettrust.inter.NegativeInterface;
 import com.targettrust.inter.PositiveInterface;
@@ -26,6 +28,7 @@ import com.targettrust.inter.PositiveInterface;
 public class WebElementsTest {
 	
 	public WebDriver driver;
+	public WebDriverWait wait;
 
 	@Before
 	public void setUp() throws Exception {
@@ -34,6 +37,8 @@ public class WebElementsTest {
 		driver = new ChromeDriver();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);	
 		driver.get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");
+		
+		wait = new WebDriverWait(driver, 10);
 	}
 
 	@After
@@ -139,14 +144,17 @@ public class WebElementsTest {
 	@Test
 	@Category(NegativeInterface.class)
 	public void testIframe() {
-	
-		driver.switchTo().frame("iframe_d");
+		driver.switchTo().frame("iframe_d");		
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//nav/button")));
 		
 		WebElement menu = driver.findElement(By.xpath("//nav/button"));
 		menu.click();
 		
-		//TODO implementar espera
 		WebElement textFieldSearch = driver.findElement(By.cssSelector("span > input"));
+		
+		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span > input")));
+		
 		textFieldSearch.sendKeys("Antônio");
 		
 		assertEquals("Antônio", textFieldSearch.getAttribute("value"));
@@ -186,5 +194,26 @@ public class WebElementsTest {
 		assertEquals("Pressione um botão!", confirm.getText());
 		confirm.accept();
 	}
+	
+	@Test
+	public void testPrompt() throws InterruptedException {
+		WebElement btnPrompt = driver.findElement(By.name("promptbtn"));
+		btnPrompt.click();
+		
+		Alert prompt = driver.switchTo().alert();
+		
+		assertEquals("Por favor, insira seu nome:", prompt.getText());
+		
+		prompt.sendKeys("Antonio");		
+		
+		Thread.sleep(3000);
+		
+		prompt.accept();
+		
+		
+		
+	}
+	
+	
 
 }

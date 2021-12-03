@@ -11,6 +11,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CPNJRegularExpressionTest {
 
@@ -35,13 +37,16 @@ public class CPNJRegularExpressionTest {
 		WebElement btnGerar = driver.findElement(By.id("bt_gerar_cnpj"));
 		btnGerar.click();
 		
-		//TODO adicionar a espera
-		Thread.sleep(3000);
+		By locator = By.id("texto_cnpj");
 		
-		WebElement labelCNPJ = driver.findElement(By.id("texto_cnpj"));
+		WebElement labelCNPJ = driver.findElement(locator);
+		
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions
+				.invisibilityOfElementWithText(locator, "Gerando..."));
+		
 		String cnpj = labelCNPJ.getText();
-		
-		
+				
 		System.out.println(cnpj);
 		
 		assertTrue(cnpj.matches("^\\d{2}\\.\\d{3}\\.\\d{3}/\\d{4}-\\d{2}$"));
@@ -56,10 +61,13 @@ public class CPNJRegularExpressionTest {
 		WebElement btnGerar = driver.findElement(By.id("bt_gerar_cnpj"));
 		btnGerar.click();
 		
-		//TODO adicionar a espera
-		Thread.sleep(5000);
+		By locator = By.id("texto_cnpj");
 		
-		WebElement labelCNPJ = driver.findElement(By.id("texto_cnpj"));
+		WebDriverWait wait = new WebDriverWait(driver, 10);
+		wait.until(ExpectedConditions
+				.invisibilityOfElementWithText(locator, "Gerando..."));
+		
+		WebElement labelCNPJ = driver.findElement(locator);
 		String cnpj = labelCNPJ.getText();
 
 		System.out.println(cnpj);
