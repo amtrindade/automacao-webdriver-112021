@@ -1,56 +1,42 @@
 package com.targettrust.test;
 
+import static com.targettust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
-import java.util.concurrent.TimeUnit;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.targettrust.inter.NegativeInterface;
 import com.targettrust.inter.PositiveInterface;
+import com.targettust.core.BaseTest;
 
-public class CalcTest {
+public class CalcTest extends BaseTest {
 
-	public WebDriver driver;
 	public WebElement textNumber1;
 	public WebElement textNumber2;
 	public WebElement textTotal;
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", 
-				"/home/antonio/dev/drivers/chromedriver");				
-		driver = new ChromeDriver();
-		
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);	
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/desafiosoma.html");		
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao/desafiosoma.html");		
 	}
 	
 	private void mapeiaElementos() {
-		textNumber1 = driver.findElement(By.id("number1"));
-		textNumber2 = driver.findElement(By.id("number2"));
-		textTotal = driver.findElement(By.id("total"));
+		textNumber1 = getDriver().findElement(By.id("number1"));
+		textNumber2 = getDriver().findElement(By.id("number2"));
+		textTotal = getDriver().findElement(By.id("total"));
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
-	
 	@Test
 	@Category(NegativeInterface.class)
 	public void testSum() throws InterruptedException {
 		mapeiaElementos();
-		WebElement btnSum = driver.findElement(By.id("somar"));
+		WebElement btnSum = getDriver().findElement(By.id("somar"));
 		
 		Float value1 = 5.45f;
 		Float value2 = 4.01f;
@@ -62,7 +48,7 @@ public class CalcTest {
 		
 		btnSum.click();
 		
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
 		wait.until(ExpectedConditions
 				.textToBePresentInElementValue(textTotal, Float.toString(total)));
 		
@@ -73,7 +59,7 @@ public class CalcTest {
 	@Category(PositiveInterface.class)
 	public void testSubtract() {
 		mapeiaElementos();
-		WebElement btnSubtract = driver.findElement(By.id("subtrair"));
+		WebElement btnSubtract = getDriver().findElement(By.id("subtrair"));
 		
 		Float value1 = 5.5f;
 		Float value2 = 4.0f;

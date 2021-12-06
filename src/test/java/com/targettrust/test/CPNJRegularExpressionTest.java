@@ -1,47 +1,35 @@
 package com.targettrust.test;
 
+import static com.targettust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertTrue;
 
-import java.util.concurrent.TimeUnit;
-
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class CPNJRegularExpressionTest {
+import com.targettust.core.BaseTest;
 
-	public WebDriver driver;
+public class CPNJRegularExpressionTest extends BaseTest{
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", 
-				"/home/antonio/dev/drivers/chromedriver");				
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);	
-		driver.get("https://www.4devs.com.br/gerador_de_cnpj");
+		getDriver().get("https://www.4devs.com.br/gerador_de_cnpj");
 	}
 
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
 	
 	@Test
 	public void testCPNJWithDot() throws InterruptedException {
-		WebElement btnGerar = driver.findElement(By.id("bt_gerar_cnpj"));
+		WebElement btnGerar = getDriver().findElement(By.id("bt_gerar_cnpj"));
 		btnGerar.click();
 		
 		By locator = By.id("texto_cnpj");
 		
-		WebElement labelCNPJ = driver.findElement(locator);
+		WebElement labelCNPJ = getDriver().findElement(locator);
 		
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
 		wait.until(ExpectedConditions
 				.invisibilityOfElementWithText(locator, "Gerando..."));
 		
@@ -55,19 +43,19 @@ public class CPNJRegularExpressionTest {
 	
 	@Test
 	public void testCPNJWithoutDot() throws InterruptedException {
-		WebElement cbNo = driver.findElement(By.id("pontuacao_nao"));
+		WebElement cbNo = getDriver().findElement(By.id("pontuacao_nao"));
 		cbNo.click();
 		
-		WebElement btnGerar = driver.findElement(By.id("bt_gerar_cnpj"));
+		WebElement btnGerar = getDriver().findElement(By.id("bt_gerar_cnpj"));
 		btnGerar.click();
 		
 		By locator = By.id("texto_cnpj");
 		
-		WebDriverWait wait = new WebDriverWait(driver, 10);
+		WebDriverWait wait = new WebDriverWait(getDriver(), 10);
 		wait.until(ExpectedConditions
 				.invisibilityOfElementWithText(locator, "Gerando..."));
 		
-		WebElement labelCNPJ = driver.findElement(locator);
+		WebElement labelCNPJ = getDriver().findElement(locator);
 		String cnpj = labelCNPJ.getText();
 
 		System.out.println(cnpj);

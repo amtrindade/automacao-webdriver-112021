@@ -1,11 +1,12 @@
 package com.targettrust.test;
 
-import static org.junit.Assert.*;
+import static com.targettust.core.DriverFactory.getDriver;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
 import org.junit.Ignore;
@@ -14,50 +15,40 @@ import org.junit.experimental.categories.Category;
 import org.junit.runners.MethodSorters;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.targettrust.inter.NegativeInterface;
 import com.targettrust.inter.PositiveInterface;
+import com.targettust.core.BaseTest;
+
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class WebElementsTest {
+public class WebElementsTest extends BaseTest {
 	
-	public WebDriver driver;
 	public WebDriverWait wait;
 
 	@Before
 	public void setUp() throws Exception {
-		System.setProperty("webdriver.chrome.driver", 
-				"/home/antonio/dev/drivers/chromedriver");				
-		driver = new ChromeDriver();
-		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);	
-		driver.get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");
 		
-		wait = new WebDriverWait(driver, 10);
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao/elementsweb.html");		
+		wait = new WebDriverWait(getDriver(), 10);
+		
 	}
-
-	@After
-	public void tearDown() throws Exception {
-		driver.quit();
-	}
-
-	
+		
 	@Test
 	@Category(PositiveInterface.class)
 	public void testA_ValidateTitle() {
-		assertEquals("Selenium WebDriver Test Page", driver.getTitle());
+		assertEquals("Selenium WebDriver Test Page", getDriver().getTitle());
 	}
 	
 	@Ignore("Bug registrado no Jira cod-323")
 	@Test
 	@Category(PositiveInterface.class)
 	public void test1_ValidateName() {
-		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
+		WebElement textFieldName = getDriver().findElement(By.name("txtbox1"));
 		
 		textFieldName.sendKeys("Antônio");
 		
@@ -68,12 +59,12 @@ public class WebElementsTest {
 	@Test
 	@Category(PositiveInterface.class)
 	public void should1_BeDisable() {
-		WebElement textFieldName = driver.findElement(By.name("txtbox1"));
+		WebElement textFieldName = getDriver().findElement(By.name("txtbox1"));
 		
 		assertTrue("Deveria estar habilitado!", textFieldName.isEnabled());
 		
 		
-		WebElement textFieldDisable = driver.findElement(By.name("txtbox2"));
+		WebElement textFieldDisable = getDriver().findElement(By.name("txtbox2"));
 
 		assertFalse("Deveria estar desabilitado!",	textFieldDisable.isEnabled());
 	}
@@ -81,7 +72,7 @@ public class WebElementsTest {
 	@Test
 	@Category(PositiveInterface.class)
 	public void testRadioGroup() throws InterruptedException {
-		List<WebElement> radios = driver.findElements(By.name("radioGroup1"));
+		List<WebElement> radios = getDriver().findElements(By.name("radioGroup1"));
 	
 		//radios.get(2).click();
 				
@@ -102,7 +93,7 @@ public class WebElementsTest {
 	
 	@Test
 	public void testValidateDropDownSingle() throws InterruptedException {
-		WebElement dropSingle = driver.findElement(By.name("dropdownlist"));
+		WebElement dropSingle = getDriver().findElement(By.name("dropdownlist"));
 		Select selectSingle = new Select(dropSingle);
 		
 		selectSingle.selectByVisibleText("Item 1");
@@ -115,7 +106,7 @@ public class WebElementsTest {
 	@Test
 	@Category(NegativeInterface.class)
 	public void testValidateDropDownMultiple() {
-		WebElement dropMulti = driver.findElement(By.name("multiselectdropdown"));
+		WebElement dropMulti = getDriver().findElement(By.name("multiselectdropdown"));
 		Select selectMulti = new Select(dropMulti);
 		
 		selectMulti.selectByIndex(4);
@@ -144,14 +135,14 @@ public class WebElementsTest {
 	@Test
 	@Category(NegativeInterface.class)
 	public void testIframe() {
-		driver.switchTo().frame("iframe_d");		
+		getDriver().switchTo().frame("iframe_d");		
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//nav/button")));
 		
-		WebElement menu = driver.findElement(By.xpath("//nav/button"));
+		WebElement menu = getDriver().findElement(By.xpath("//nav/button"));
 		menu.click();
 		
-		WebElement textFieldSearch = driver.findElement(By.cssSelector("span > input"));
+		WebElement textFieldSearch = getDriver().findElement(By.cssSelector("span > input"));
 		
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("span > input")));
 		
@@ -159,19 +150,19 @@ public class WebElementsTest {
 		
 		assertEquals("Antônio", textFieldSearch.getAttribute("value"));
 				
-		driver.switchTo().defaultContent();
+		getDriver().switchTo().defaultContent();
 		
-		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		WebElement btnAlert = getDriver().findElement(By.name("alertbtn"));
 		assertTrue(btnAlert.isDisplayed());
 	}
 	
 	@Test
 	@Category(NegativeInterface.class)
 	public void testB_Alert() {
-		WebElement btnAlert = driver.findElement(By.name("alertbtn"));
+		WebElement btnAlert = getDriver().findElement(By.name("alertbtn"));
 		btnAlert.click();
 		
-		Alert alert = driver.switchTo().alert();
+		Alert alert = getDriver().switchTo().alert();
 		
 		assertEquals("Eu sou um alerta!", alert.getText());
 		
@@ -181,10 +172,10 @@ public class WebElementsTest {
 	@Test 
 	@Category(NegativeInterface.class)
 	public void testConfirm() {
-		WebElement btnConfirm = driver.findElement(By.name("confirmbtn"));
+		WebElement btnConfirm = getDriver().findElement(By.name("confirmbtn"));
 		btnConfirm.click();
 		
-		Alert confirm = driver.switchTo().alert();
+		Alert confirm = getDriver().switchTo().alert();
 		
 		assertEquals("Pressione um botão!", confirm.getText());
 		
@@ -197,10 +188,10 @@ public class WebElementsTest {
 	
 	@Test
 	public void testPrompt() throws InterruptedException {
-		WebElement btnPrompt = driver.findElement(By.name("promptbtn"));
+		WebElement btnPrompt = getDriver().findElement(By.name("promptbtn"));
 		btnPrompt.click();
 		
-		Alert prompt = driver.switchTo().alert();
+		Alert prompt = getDriver().switchTo().alert();
 		
 		assertEquals("Por favor, insira seu nome:", prompt.getText());
 		
