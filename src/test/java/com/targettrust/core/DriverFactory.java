@@ -1,4 +1,4 @@
-package com.targettust.core;
+package com.targettrust.core;
 
 import java.util.concurrent.TimeUnit;
 

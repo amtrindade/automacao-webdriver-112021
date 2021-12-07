@@ -1,6 +1,6 @@
 package com.targettrust.test;
 
-import static com.targettust.core.DriverFactory.getDriver;
+import static com.targettrust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 
 import java.io.File;
@@ -15,7 +15,7 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 
-import com.targettust.core.BaseTest;
+import com.targettrust.core.BaseTest;
 
 public class DragAndDropTest extends BaseTest{
 	

@@ -4,9 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+import com.targettrust.core.BaseTest;
 import com.targettrust.page.LoginPage;
 import com.targettrust.page.MainPage;
-import com.targettust.core.BaseTest;
 
 public class LoginTest extends BaseTest{
 	

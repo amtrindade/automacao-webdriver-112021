@@ -1,6 +1,6 @@
 package com.targettrust.test;
 
-import static com.targettust.core.DriverFactory.getDriver;
+import static com.targettrust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -10,7 +10,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.targettust.core.BaseTest;
+import com.targettrust.core.BaseTest;
 
 public class CPNJRegularExpressionTest extends BaseTest{
 

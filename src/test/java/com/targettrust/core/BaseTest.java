@@ -1,6 +1,6 @@
-package com.targettust.core;
+package com.targettrust.core;
 
-import static com.targettust.core.DriverFactory.getDriver;
+import static com.targettrust.core.DriverFactory.getDriver;
 
 import java.io.File;
 import java.io.IOException;

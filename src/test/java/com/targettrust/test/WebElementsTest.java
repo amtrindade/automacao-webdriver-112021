@@ -1,6 +1,6 @@
 package com.targettrust.test;
 
-import static com.targettust.core.DriverFactory.getDriver;
+import static com.targettrust.core.DriverFactory.getDriver;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -20,9 +20,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import com.targettrust.core.BaseTest;
 import com.targettrust.inter.NegativeInterface;
 import com.targettrust.inter.PositiveInterface;
-import com.targettust.core.BaseTest;
 
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)

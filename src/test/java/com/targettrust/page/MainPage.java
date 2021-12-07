@@ -1,6 +1,6 @@
 package com.targettrust.page;
 
-import static com.targettust.core.DriverFactory.getDriver;
+import static com.targettrust.core.DriverFactory.getDriver;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
