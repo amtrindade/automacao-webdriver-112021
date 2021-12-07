@@ -17,7 +17,7 @@ public class CacheTest extends BaseTest{
 
 	@Before
 	public void setUp() throws Exception {	
-		getDriver().get("http://antoniotrindade.com.br/treinoautomacao");
+		getDriver().get("http://antoniotrindade.com.br/treinoautomacao");		
 	}
 	
 	@Test
