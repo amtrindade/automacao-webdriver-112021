@@ -35,5 +35,16 @@ public class LoginPage {
 		btnAcess.click();
 		return new MainPage();
 	}
+	
+	public LoginPage submitInvalid() {
+		WebElement btnAcess = getDriver().findElement(By.id("submit_button"));
+		btnAcess.click();
+		return this;
+	}
+	
+	public String getMessageError() {
+		WebElement dialogError = getDriver().findElement(By.xpath("//*[@class='nm-li nm-message-error']"));
+		return dialogError.getText();
+	}
 
 }

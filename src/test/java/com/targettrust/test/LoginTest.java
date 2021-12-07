@@ -17,15 +17,31 @@ public class LoginTest extends BaseTest{
 	public void testValidLogin() {
 		
 		loginPage = new LoginPage();
+		
 		loginPage.open();
-		loginPage.setEnvironment("trindade");
-		loginPage.setUser("aluno01");
-		loginPage.setPass("123456");
+		loginPage.setEnvironment("trindade")
+			.setUser("aluno01")
+			.setPass("123456");
+		
 		mainPage = loginPage.submit();
 		
 		mainPage.clickAvatar();
 		
 		assertEquals("Aluno 01 (aluno01)", mainPage.getTextAvatar());
+		
+	}
+	
+	@Test
+	public void testInvalidLogin() {
+		loginPage = new LoginPage();
+		
+		loginPage.open();
+		loginPage.setEnvironment("trindade")
+			.setUser("alunoinvalido")
+			.setPass("123456");
+		
+		loginPage.submitInvalid();
+		assertEquals("ERRO\nLOGIN INVÁLIDO.", loginPage.getMessageError());
 		
 	}
 

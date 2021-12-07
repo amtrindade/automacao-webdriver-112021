@@ -17,5 +17,11 @@ public class MainPage {
 		WebElement menuAvatar = getDriver().findElement(By.xpath("//span[@class='text-login']/.."));
 		return menuAvatar.getText();
 	}
+	
+	public TaskPage menuTask() {
+		WebElement menuTask = getDriver().findElement(By.linkText("Tarefa"));
+		menuTask.click();
+		return new TaskPage();
+	}
 
 }
