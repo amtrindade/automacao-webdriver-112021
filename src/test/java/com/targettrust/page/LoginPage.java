@@ -5,10 +5,12 @@ import static com.targettrust.core.DriverFactory.getDriver;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
+import com.targettrust.core.GlobalProperty;
+
 public class LoginPage {
 
 	public LoginPage open() {		
-		getDriver().get("https://center.umov.me/");
+		getDriver().get(GlobalProperty.getProperty("umovme.endpoint"));
 		return this;
 	}
 	

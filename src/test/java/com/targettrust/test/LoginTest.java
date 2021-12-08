@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import com.targettrust.core.BaseTest;
+import com.targettrust.core.GlobalProperty;
 import com.targettrust.page.LoginPage;
 import com.targettrust.page.MainPage;
 
@@ -20,7 +21,7 @@ public class LoginTest extends BaseTest{
 		
 		loginPage.open();
 		loginPage.setEnvironment("trindade")
-			.setUser("aluno01")
+			.setUser(GlobalProperty.getProperty("umovme.user"))
 			.setPass("123456");
 		
 		mainPage = loginPage.submit();
